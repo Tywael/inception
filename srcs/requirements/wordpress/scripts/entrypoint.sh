@@ -8,6 +8,7 @@ if [ ! -f "wp-config.php" ]; then
   wp core download
   cp /conf/phpinfo.php /var/www/"$DOMAIN"
   while [ ! -f "wp-config-sample.php" ]; do
+    echo "not ready"
     sleep 1
   done
   wp core config \
@@ -16,6 +17,7 @@ if [ ! -f "wp-config.php" ]; then
     --dbpass="$MYSQL_PASSWORD" \
     --dbhost="$WORDPRESS_DB_HOST"
   while [ ! -f "wp-config.php" ]; do
+      echo "not ready"
       sleep 1
   done
   wp core install \

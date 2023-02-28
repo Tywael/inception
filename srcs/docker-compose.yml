@@ -7,7 +7,7 @@ services:
     build:
       context: ./requirements/mariadb
     container_name: mariadb
-    restart: always
+    restart: on-failure
     env_file: .env
     volumes:
       - ~/data/mariadb:/var/lib/mysql
@@ -21,7 +21,7 @@ services:
       args:
         DOMAIN: ${DOMAIN}
     container_name: wordpress
-    restart: always
+    restart: on-failure
     env_file: .env
     volumes:
       - ~/data/wordpress:/var/www/${DOMAIN}
@@ -37,7 +37,7 @@ services:
       args:
         DOMAIN: ${DOMAIN}
     container_name: nginx
-    restart: always
+    restart: on-failure
     env_file: .env
     ports:
       - "443:443"
