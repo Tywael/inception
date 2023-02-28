@@ -14,7 +14,7 @@ WORKDIR ${DIR}
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --output /usr/bin/wp
 RUN chmod +x /usr/bin/wp
 
-COPY conf/php.conf.ini /usr/local/etc/php/conf.d/conf.ini \
+COPY conf/php.conf.ini /usr/local/etc/php/conf.d/conf.ini
 COPY conf/phpinfo.php /conf/phpinfo.php
 COPY ./scripts/entrypoint.sh /tmp/entrypoint.sh
 

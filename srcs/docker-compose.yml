@@ -12,14 +12,14 @@ services:
     volumes:
       - ~/data/mariadb:/var/lib/mysql
       - db_volume:/var/lib/mysql
-    network:
+    networks:
       - 42-network
   # WORDPRESS
   wordpress:
     build:
-    context: ./requirements/wordpress
-    args:
-      DOMAIN: ${DOMAIN}
+      context: ./requirements/wordpress
+      args:
+        DOMAIN: ${DOMAIN}
     container_name: wordpress
     restart: always
     env_file: .env
@@ -40,12 +40,12 @@ services:
     restart: always
     env_file: .env
     ports:
-      -"443:443"
+      - "443:443"
     volumes:
-      -wp_volume:/var/www/${DOMAIN}
+      - wp_volume:/var/www/${DOMAIN}
     depends_on:
       - wordpress
-    network:
+    networks:
       - 42-network
 
 # NETWORK
@@ -55,6 +55,18 @@ networks:
 # VOLUMES
 volumes:
   wp_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/${LOGIN}/data/wordpress"
+  db_volume:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/home/${LOGIN}/data/mariadb"
+  backup_volume:
     driver: local
     driver_opts:
       type: "none"
