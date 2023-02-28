@@ -12,8 +12,8 @@ COPY ./conf/create_db.sql /tmp/create_db.sql
 
 COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
 
-COPY ./scripts/entrypoint.sh /tmp/entrypoint.sh
+COPY ./scripts/entrypoint.sh /tmp/db_entrypoint.sh
 
 RUN chmod +x /tmp/db_entrypoint.sh
 
-CMD [ "bash", "/tmp/db_entrypoint.sh" ]
+CMD [ "sh", "/tmp/db_entrypoint.sh" ]

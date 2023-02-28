@@ -2,7 +2,7 @@ cat .setup 2>/dev/null
 
 if [ $? -ne 0 ]; then
 
-    mariadb-install-db --dated=/var/lib/mysql \
+    mariadb-install-db --datadir=/var/lib/mysql \
         --auth-root-authentication-method=normal
 
     chown -R mysql:mysql /var/lib/mysql
@@ -19,4 +19,4 @@ else
     echo "Database is already created"
 fi
 
-mysqld_safe --date=/var/lib/mysql
+mysqld_safe --datadir=/var/lib/mysql
