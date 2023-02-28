@@ -66,9 +66,4 @@ volumes:
       type: "none"
       o: "bind"
       device: "/home/${LOGIN}/data/mariadb"
-  backup_volume:
-    driver: local
-    driver_opts:
-      type: "none"
-      o: "bind"
-      device: "/home/${LOGIN}/data/backup"
+      
