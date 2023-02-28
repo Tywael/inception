@@ -17,7 +17,7 @@ if [ ! -f "wp-config.php" ]; then
     --dbhost="$WORDPRESS_DB_HOST"
   while [ ! -f "wp-config.php" ]; do
       sleep 1
-  don
+  done
   wp core install \
     --url="https://$DOMAIN" \
     --title="$DOMAIN" \

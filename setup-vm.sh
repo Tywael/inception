@@ -63,7 +63,7 @@ if [ -d "/home/yalthaus/data/mariadb" ]; then \
 	echo "Mariadb directory created successfully"; \
 fi
 
-sudo sed -i "s/localhost/yalthaus.42.fr/g" /etc/hosts
+sudo sed -i "s/localhost/yalthaus.42.ch/g" /etc/hosts
 
 echo -e
 echo "${GREEN}██████████████████████████ Setup done ███████████████████████████${RESET}"
