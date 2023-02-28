@@ -16,8 +16,8 @@ RUN chmod +x /usr/bin/wp
 
 COPY conf/php.conf.ini /usr/local/etc/php/conf.d/conf.ini
 COPY conf/phpinfo.php /conf/phpinfo.php
-COPY ./scripts/entrypoint.sh /tmp/entrypoint.sh
+COPY ./scripts/entrypoint.sh /tmp/wp_entrypoint.sh
 
-RUN chmod +x /tmp/entrypoint.sh
+RUN chmod +x /tmp/wp_entrypoint.sh
 
-ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
+CMD ["bash", "/tmp/wp_entrypoint.sh"]
