@@ -10,6 +10,8 @@ if [ $? -eq 0 ]; then
   sed -i "s|.*listen = 127.0.0.1.*|listen = 0.0.0.0:9000|g" $target
 fi
 if [ ! -f "wp-config.php" ]; then
+  chown -R www-data:www-data /var/www/*
+  chmod -R 755 /var/www/*
   wp core download
   cp /conf/phpinfo.php /var/www/"$DOMAIN"
   wp core config \

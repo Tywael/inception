@@ -33,7 +33,7 @@ host: ## Add domain to /etc/hosts
 ##@ Docker
 ps: ## List containers
 	@echo "${CYAN}List containers${RESET}"
-	@${DOCKER} ps
+	@docker compose -p inception ps
 
 network: ## List networks
 	@echo "${CYAN}List networks${RESET}"
@@ -118,9 +118,16 @@ info: ## Display containers running urls
 	@echo "${GREEN}Containers running urls${RESET}"
 	@echo "Website: https://${DOMAIN}"
 	@echo "Admin panel: https://${DOMAIN}/wp-admin"
+	@echo "connect to mariadb"
+	@echo "- mysql -h mariadb -u $MYSQL_USER -p$MYSQL_PASSWORD $WORDPRESS_DB_NAME;"
+	@echo "- SHOW DATABASES;"
+	@echo "- SHOW TABLES;"
+	@echo "- SELECT * FROM {TABLE_FIELDS}"
 
 help:
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage: make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+re: down prune build up
 
 ##@
 .PHONY: all env host ps pause unpause start stop up build down clean restart rebuild fclean nginx mariadb wordpress exec-wp exec-db exec-srv info help
