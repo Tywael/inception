@@ -8,17 +8,18 @@ RUN apk update && apk upgrade \
     && apk add --no-cache --quiet --update \
     	   nginx openssl vim
 
+EXPOSE 443
+
 RUN	mkdir -p /etc/nginx/ssl/private /etc/nginx/ssl/certs
 
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/private/$DOMAIN.key \
-    -out /etc/nginx/ssl/certs/$DOMAIN.crt \
-    -subj "/C=CH/ST=Geneva/L=Geneva/O=42/OU=42/CN=$DOMAIN"
+RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+        -out /etc/nginx/ssl/certs/$DOMAIN.crt \
+        -keyout /etc/nginx/ssl/private/$DOMAIN.key \
+        -subj "/C=CH/ST=Switzerland/L=Lausanne/O=42 School/OU=42Lausanne/CN=${DOMAIN}/"
+
 
 RUN mkdir -p /var/run/nginx
 
 COPY ./conf/nginx.conf /etc/nginx/http.d/default.conf
-
-EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

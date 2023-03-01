@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while ! mysql -h mariadb -u $MYSQL_USER -p$MYSQL_PASSWORD $WORDPRESS_DB_NAME &>/dev/null; do
+while ! mysql -h mariadb -u $MYSQL_USER -p$MYSQL_PASSWORD $WORDPRESS_DB_NAME; do
   sleep 3
 done
 
